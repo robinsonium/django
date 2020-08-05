@@ -1,8 +1,8 @@
 from __future__ import unicode_literals
 from django.db import models
 from datetime import datetime
-# import pytz
-# from pytz import timezone
+import pytz
+from pytz import timezone
 
 class ShowManager(models.Manager):
     def validate_show(self, postdata):
