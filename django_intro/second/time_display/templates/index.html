@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="{% static 'js/script.js' %}"></script>
+
+</head>
+
+<body>
+    <h1>Welcome to the second Django project!</h1>
+    <h3>My name is {{name}}</h3>
+    <h4>Let's check the current time:</h4>
+    {{current_time}}
+    <h4>And the gmtime:</h4>
+    {{gmtime}}
+    <h5>If these two times are the same, I can't figure out why. This works fine in the REPL, but not in the Django</h5>
+    <h4>These are things I dig:</h4>
+    <ul>
+        {% for hobby in hobbies %}
+        <li>{{hobby}}</li>
+        {% endfor %}
+    </ul>
+</body>
+
+</html>

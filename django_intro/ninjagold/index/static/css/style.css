@@ -1,0 +1,23 @@
+
+
+#wrapper{
+    display: inline-block;
+    outline: 2px black solid;
+}
+
+#activities_header{
+    padding: 5px;
+}
+
+#activities{
+    border: 2px black solid;
+    height: 14 rem;
+    overflow-y: scroll;
+}
+
+.cell{
+    outline: 2px black solid;
+    display: inline-block;
+    width: 200px;
+    text-align: center;
+}

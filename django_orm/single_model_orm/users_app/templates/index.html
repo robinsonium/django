@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body>
+    <div id="wrapper">
+        <h3>All your users are belong to us</h1>
+            <table class="w3-table w3-striped">
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email address</th>
+                    <th>Age</th>
+                </tr>
+                {% for user in all_users %}
+                <tr>
+                    <td>{{user.id}}</td>
+                    <td>{{user.first_name}} {{user.last_name}}</td>
+                    <td>{{user.email_address}}</td>
+                    <td>{{user.age}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            <div id="adduser">
+                <h3>Add a user</h3>
+                <form action="add_user" method="post">
+                    {% csrf_token %}
+                    <p>First name<input type="text" name="first_name">
+                        Last name<input type="text" name="last_name"></p>
+                    <p>Email address<input type="text" name="email_address">
+                        Age<input type="text" name="age"></p>
+                    <button>Add</button>
+                </form>
+            </div>
+    </div>
+</body>
+
+</html>

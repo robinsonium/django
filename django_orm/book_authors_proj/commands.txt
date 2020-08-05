@@ -1,0 +1,507 @@
+In [1]: from books_authors_app.models import *                                                                                                                                                              
+
+In [2]: c=Book.objects.get(name="C Sharp")                                                                                                                                                                  
+---------------------------------------------------------------------------
+FieldError                                Traceback (most recent call last)
+<ipython-input-2-155c28130d98> in <module>
+----> 1 c=Book.objects.get(name="C Sharp")
+
+~/Library/Mobile Documents/com~apple~CloudDocs/Documents/codingdojo/python_stack/my_environments/djangoPy3Env/lib/python3.7/site-packages/django/db/models/manager.py in manager_method(self, *args, **kwargs)
+     80         def create_method(name, method):
+     81             def manager_method(self, *args, **kwargs):
+---> 82                 return getattr(self.get_queryset(), name)(*args, **kwargs)
+     83             manager_method.__name__ = method.__name__
+     84             manager_method.__doc__ = method.__doc__
+
+~/Library/Mobile Documents/com~apple~CloudDocs/Documents/codingdojo/python_stack/my_environments/djangoPy3Env/lib/python3.7/site-packages/django/db/models/query.py in get(self, *args, **kwargs)
+    397         keyword arguments.
+    398         """
+--> 399         clone = self.filter(*args, **kwargs)
+    400         if self.query.can_filter() and not self.query.distinct_fields:
+    401             clone = clone.order_by()
+
+~/Library/Mobile Documents/com~apple~CloudDocs/Documents/codingdojo/python_stack/my_environments/djangoPy3Env/lib/python3.7/site-packages/django/db/models/query.py in filter(self, *args, **kwargs)
+    890         set.
+    891         """
+--> 892         return self._filter_or_exclude(False, *args, **kwargs)
+    893 
+    894     def exclude(self, *args, **kwargs):
+
+~/Library/Mobile Documents/com~apple~CloudDocs/Documents/codingdojo/python_stack/my_environments/djangoPy3Env/lib/python3.7/site-packages/django/db/models/query.py in _filter_or_exclude(self, negate, *args, **kwargs)
+    908             clone.query.add_q(~Q(*args, **kwargs))
+    909         else:
+--> 910             clone.query.add_q(Q(*args, **kwargs))
+    911         return clone
+    912 
+
+~/Library/Mobile Documents/com~apple~CloudDocs/Documents/codingdojo/python_stack/my_environments/djangoPy3Env/lib/python3.7/site-packages/django/db/models/sql/query.py in add_q(self, q_object)
+   1288         # So, demotion is OK.
+   1289         existing_inner = {a for a in self.alias_map if self.alias_map[a].join_type == INNER}
+-> 1290         clause, _ = self._add_q(q_object, self.used_aliases)
+   1291         if clause:
+   1292             self.where.add(clause, AND)
+
+~/Library/Mobile Documents/com~apple~CloudDocs/Documents/codingdojo/python_stack/my_environments/djangoPy3Env/lib/python3.7/site-packages/django/db/models/sql/query.py in _add_q(self, q_object, used_aliases, branch_negated, current_negated, allow_joins, split_subq, simple_col)
+   1316                     child, can_reuse=used_aliases, branch_negated=branch_negated,
+   1317                     current_negated=current_negated, allow_joins=allow_joins,
+-> 1318                     split_subq=split_subq, simple_col=simple_col,
+   1319                 )
+   1320                 joinpromoter.add_votes(needed_inner)
+
+~/Library/Mobile Documents/com~apple~CloudDocs/Documents/codingdojo/python_stack/my_environments/djangoPy3Env/lib/python3.7/site-packages/django/db/models/sql/query.py in build_filter(self, filter_expr, branch_negated, current_negated, can_reuse, allow_joins, split_subq, reuse_with_filtered_relation, simple_col)
+   1188         if not arg:
+   1189             raise FieldError("Cannot parse keyword query %r" % arg)
+-> 1190         lookups, parts, reffed_expression = self.solve_lookup_type(arg)
+   1191 
+   1192         if not getattr(reffed_expression, 'filterable', True):
+
+~/Library/Mobile Documents/com~apple~CloudDocs/Documents/codingdojo/python_stack/my_environments/djangoPy3Env/lib/python3.7/site-packages/django/db/models/sql/query.py in solve_lookup_type(self, lookup)
+   1047             if expression:
+   1048                 return expression_lookups, (), expression
+-> 1049         _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+   1050         field_parts = lookup_splitted[0:len(lookup_splitted) - len(lookup_parts)]
+   1051         if len(lookup_parts) > 1 and not field_parts:
+
+~/Library/Mobile Documents/com~apple~CloudDocs/Documents/codingdojo/python_stack/my_environments/djangoPy3Env/lib/python3.7/site-packages/django/db/models/sql/query.py in names_to_path(self, names, opts, allow_many, fail_on_missing)
+   1418                     ])
+   1419                     raise FieldError("Cannot resolve keyword '%s' into field. "
+-> 1420                                      "Choices are: %s" % (name, ", ".join(available)))
+   1421                 break
+   1422             # Check if we need any joins for concrete inheritance cases (the
+
+FieldError: Cannot resolve keyword 'name' into field. Choices are: authors, created_at, desc, id, title, updated_at
+
+In [3]: c=Book.objects.all().filter(name="C Sharp")                                                                                                                                                         
+---------------------------------------------------------------------------
+FieldError                                Traceback (most recent call last)
+<ipython-input-3-fcf5261b8990> in <module>
+----> 1 c=Book.objects.all().filter(name="C Sharp")
+
+~/Library/Mobile Documents/com~apple~CloudDocs/Documents/codingdojo/python_stack/my_environments/djangoPy3Env/lib/python3.7/site-packages/django/db/models/query.py in filter(self, *args, **kwargs)
+    890         set.
+    891         """
+--> 892         return self._filter_or_exclude(False, *args, **kwargs)
+    893 
+    894     def exclude(self, *args, **kwargs):
+
+~/Library/Mobile Documents/com~apple~CloudDocs/Documents/codingdojo/python_stack/my_environments/djangoPy3Env/lib/python3.7/site-packages/django/db/models/query.py in _filter_or_exclude(self, negate, *args, **kwargs)
+    908             clone.query.add_q(~Q(*args, **kwargs))
+    909         else:
+--> 910             clone.query.add_q(Q(*args, **kwargs))
+    911         return clone
+    912 
+
+~/Library/Mobile Documents/com~apple~CloudDocs/Documents/codingdojo/python_stack/my_environments/djangoPy3Env/lib/python3.7/site-packages/django/db/models/sql/query.py in add_q(self, q_object)
+   1288         # So, demotion is OK.
+   1289         existing_inner = {a for a in self.alias_map if self.alias_map[a].join_type == INNER}
+-> 1290         clause, _ = self._add_q(q_object, self.used_aliases)
+   1291         if clause:
+   1292             self.where.add(clause, AND)
+
+~/Library/Mobile Documents/com~apple~CloudDocs/Documents/codingdojo/python_stack/my_environments/djangoPy3Env/lib/python3.7/site-packages/django/db/models/sql/query.py in _add_q(self, q_object, used_aliases, branch_negated, current_negated, allow_joins, split_subq, simple_col)
+   1316                     child, can_reuse=used_aliases, branch_negated=branch_negated,
+   1317                     current_negated=current_negated, allow_joins=allow_joins,
+-> 1318                     split_subq=split_subq, simple_col=simple_col,
+   1319                 )
+   1320                 joinpromoter.add_votes(needed_inner)
+
+~/Library/Mobile Documents/com~apple~CloudDocs/Documents/codingdojo/python_stack/my_environments/djangoPy3Env/lib/python3.7/site-packages/django/db/models/sql/query.py in build_filter(self, filter_expr, branch_negated, current_negated, can_reuse, allow_joins, split_subq, reuse_with_filtered_relation, simple_col)
+   1188         if not arg:
+   1189             raise FieldError("Cannot parse keyword query %r" % arg)
+-> 1190         lookups, parts, reffed_expression = self.solve_lookup_type(arg)
+   1191 
+   1192         if not getattr(reffed_expression, 'filterable', True):
+
+~/Library/Mobile Documents/com~apple~CloudDocs/Documents/codingdojo/python_stack/my_environments/djangoPy3Env/lib/python3.7/site-packages/django/db/models/sql/query.py in solve_lookup_type(self, lookup)
+   1047             if expression:
+   1048                 return expression_lookups, (), expression
+-> 1049         _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+   1050         field_parts = lookup_splitted[0:len(lookup_splitted) - len(lookup_parts)]
+   1051         if len(lookup_parts) > 1 and not field_parts:
+
+~/Library/Mobile Documents/com~apple~CloudDocs/Documents/codingdojo/python_stack/my_environments/djangoPy3Env/lib/python3.7/site-packages/django/db/models/sql/query.py in names_to_path(self, names, opts, allow_many, fail_on_missing)
+   1418                     ])
+   1419                     raise FieldError("Cannot resolve keyword '%s' into field. "
+-> 1420                                      "Choices are: %s" % (name, ", ".join(available)))
+   1421                 break
+   1422             # Check if we need any joins for concrete inheritance cases (the
+
+FieldError: Cannot resolve keyword 'name' into field. Choices are: authors, created_at, desc, id, title, updated_at
+
+In [4]: c                                                                                                                                                                                                   
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+<ipython-input-4-2b66fd261ee5> in <module>
+----> 1 c
+
+NameError: name 'c' is not defined
+
+In [5]: Book.objects.all()                                                                                                                                                                                  
+Out[5]: <QuerySet [<Book: Book object (1)>, <Book: Book object (2)>, <Book: Book object (3)>, <Book: Book object (4)>, <Book: Book object (5)>]>
+
+In [6]: Book.objects.get(id=1)                                                                                                                                                                              
+Out[6]: <Book: Book object (1)>
+
+In [7]: c=Book.objects.get(id=1)                                                                                                                                                                            
+
+In [8]: c.name                                                                                                                                                                                              
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+<ipython-input-8-dda41e913c26> in <module>
+----> 1 c.name
+
+AttributeError: 'Book' object has no attribute 'name'
+
+In [9]: c.title                                                                                                                                                                                             
+Out[9]: 'C Sharp'
+
+In [10]: c=Book.objects.get(title="C Sharp")                                                                                                                                                                
+
+In [11]: c.title                                                                                                                                                                                            
+Out[11]: 'C Sharp'
+
+In [12]: c.title="C#"                                                                                                                                                                                       
+
+In [13]: c.save()                                                                                                                                                                                           
+
+In [14]: c.title                                                                                                                                                                                            
+Out[14]: 'C#'
+
+In [15]: b=Author.objects.get(id=4)                                                                                                                                                                         
+---------------------------------------------------------------------------
+DoesNotExist                              Traceback (most recent call last)
+<ipython-input-15-e2d3c91a5b1d> in <module>
+----> 1 b=Author.objects.get(id=4)
+
+~/Library/Mobile Documents/com~apple~CloudDocs/Documents/codingdojo/python_stack/my_environments/djangoPy3Env/lib/python3.7/site-packages/django/db/models/manager.py in manager_method(self, *args, **kwargs)
+     80         def create_method(name, method):
+     81             def manager_method(self, *args, **kwargs):
+---> 82                 return getattr(self.get_queryset(), name)(*args, **kwargs)
+     83             manager_method.__name__ = method.__name__
+     84             manager_method.__doc__ = method.__doc__
+
+~/Library/Mobile Documents/com~apple~CloudDocs/Documents/codingdojo/python_stack/my_environments/djangoPy3Env/lib/python3.7/site-packages/django/db/models/query.py in get(self, *args, **kwargs)
+    406             raise self.model.DoesNotExist(
+    407                 "%s matching query does not exist." %
+--> 408                 self.model._meta.object_name
+    409             )
+    410         raise self.model.MultipleObjectsReturned(
+
+DoesNotExist: Author matching query does not exist.
+
+In [16]: b=Author.objects.all().get(id=4)                                                                                                                                                                   
+---------------------------------------------------------------------------
+DoesNotExist                              Traceback (most recent call last)
+<ipython-input-16-4f74e2322a10> in <module>
+----> 1 b=Author.objects.all().get(id=4)
+
+~/Library/Mobile Documents/com~apple~CloudDocs/Documents/codingdojo/python_stack/my_environments/djangoPy3Env/lib/python3.7/site-packages/django/db/models/query.py in get(self, *args, **kwargs)
+    406             raise self.model.DoesNotExist(
+    407                 "%s matching query does not exist." %
+--> 408                 self.model._meta.object_name
+    409             )
+    410         raise self.model.MultipleObjectsReturned(
+
+DoesNotExist: Author matching query does not exist.
+
+In [17]: Author.objects.all()                                                                                                                                                                               
+Out[17]: <QuerySet [<Author: Author object (1)>, <Author: Author object (2)>]>
+
+In [18]: Author.objects.create(first_name="Fyodor",last_name="Dostoevsky")                                                                                                                                  
+Out[18]: <Author: Author object (3)>
+
+In [19]: Author.objects.create(first_name="William",last_name="Shakespeare")                                                                                                                                
+Out[19]: <Author: Author object (4)>
+
+In [20]: Author.objects.create(first_name="Lao",last_name="Tzu")                                                                                                                                            
+Out[20]: <Author: Author object (5)>
+
+In [21]: Author.objects.all()                                                                                                                                                                               
+Out[21]: <QuerySet [<Author: Author object (1)>, <Author: Author object (2)>, <Author: Author object (3)>, <Author: Author object (4)>, <Author: Author object (5)>]>
+
+In [22]: b=Author.objects.get(id=4)                                                                                                                                                                         
+
+In [23]: b.first_name                                                                                                                                                                                       
+Out[23]: 'William'
+
+In [24]: b.first_name="Bill"                                                                                                                                                                                
+
+In [25]: b.save()                                                                                                                                                                                           
+
+In [26]: auth1=Author.objects.get(id=1)                                                                                                                                                                     
+
+In [27]: book1=Book.objects.get(id=1)                                                                                                                                                                       
+
+In [28]: book2=Book.objects.get(id=2)                                                                                                                                                                       
+
+In [29]: auth1.add(book1)                                                                                                                                                                                   
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+<ipython-input-29-55b4fa7d2d6a> in <module>
+----> 1 auth1.add(book1)
+
+AttributeError: 'Author' object has no attribute 'add'
+
+In [30]: auth1.first_name                                                                                                                                                                                   
+Out[30]: 'Jane'
+
+In [31]: auth1.books.add(book1)                                                                                                                                                                             
+
+In [32]: auth1.books.add(book2)                                                                                                                                                                             
+
+In [33]: auth1.save()                                                                                                                                                                                       
+
+In [34]: book3=Book.objects.get(id=3)                                                                                                                                                                       
+
+In [35]: auth2=Author.objects.get(id=2)                                                                                                                                                                     
+
+In [36]: auth2.books.add(book1)                                                                                                                                                                             
+
+In [37]: auth2.save()                                                                                                                                                                                       
+
+In [38]: book2.authors.add(auth2)                                                                                                                                                                           
+
+In [39]: book3.authors.add(auth2)                                                                                                                                                                           
+
+In [40]: book2.save()                                                                                                                                                                                       
+
+In [41]: book3.save()                                                                                                                                                                                       
+
+In [42]: auth2.books                                                                                                                                                                                        
+Out[42]: <django.db.models.fields.related_descriptors.create_forward_many_to_many_manager.<locals>.ManyRelatedManager at 0x7fda2d0a6a50>
+
+In [43]: auth2.books.title                                                                                                                                                                                  
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+<ipython-input-43-57b55927d073> in <module>
+----> 1 auth2.books.title
+
+AttributeError: 'ManyRelatedManager' object has no attribute 'title'
+
+In [44]: auth2                                                                                                                                                                                              
+Out[44]: <Author: Author object (2)>
+
+In [45]: auth2.books.count()                                                                                                                                                                                
+Out[45]: 3
+
+In [46]: auth2.books.all().title                                                                                                                                                                            
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+<ipython-input-46-0bcfc621fa91> in <module>
+----> 1 auth2.books.all().title
+
+AttributeError: 'QuerySet' object has no attribute 'title'
+
+In [47]: auth2.books.all()                                                                                                                                                                                  
+Out[47]: <QuerySet [<Book: Book object (1)>, <Book: Book object (2)>, <Book: Book object (3)>]>
+
+In [48]: book4=Book.objects.get(id=4)                                                                                                                                                                       
+
+In [49]: auth3                                                                                                                                                                                              
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+<ipython-input-49-64c2ee7cd1bb> in <module>
+----> 1 auth3
+
+NameError: name 'auth3' is not defined
+
+In [50]: auth3=Author.objects.get(id=3)                                                                                                                                                                     
+
+In [51]: auth3.books.add(book1)                                                                                                                                                                             
+
+In [52]: auth3.books.add(book2)                                                                                                                                                                             
+
+In [53]: auth3.books.add(book3)                                                                                                                                                                             
+
+In [54]: auth3.books.add(book4)                                                                                                                                                                             
+
+In [55]: auth3.save()                                                                                                                                                                                       
+
+In [56]: auth4=Author.objects.get(id=4)                                                                                                                                                                     
+
+In [57]: auth4.books.add([book1,book2,book3,book4])                                                                                                                                                         
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+<ipython-input-57-ae9eb1443939> in <module>
+----> 1 auth4.books.add([book1,book2,book3,book4])
+
+~/Library/Mobile Documents/com~apple~CloudDocs/Documents/codingdojo/python_stack/my_environments/djangoPy3Env/lib/python3.7/site-packages/django/db/models/fields/related_descriptors.py in add(self, through_defaults, *objs)
+    963                 self._add_items(
+    964                     self.source_field_name, self.target_field_name, *objs,
+--> 965                     through_defaults=through_defaults,
+    966                 )
+    967                 # If this is a symmetrical m2m relation to self, add the mirror
+
+~/Library/Mobile Documents/com~apple~CloudDocs/Documents/codingdojo/python_stack/my_environments/djangoPy3Env/lib/python3.7/site-packages/django/db/models/fields/related_descriptors.py in _add_items(self, source_field_name, target_field_name, through_defaults, *objs)
+   1083                         )
+   1084                     else:
+-> 1085                         new_ids.add(obj)
+   1086 
+   1087                 db = router.db_for_write(self.through, instance=self.instance)
+
+TypeError: unhashable type: 'list'
+
+In [58]: for book in [book1 book2 book3 book4]: 
+    ...:     auth4.books.add(book)                                                                                                                                                                          
+  File "<ipython-input-58-825135066508>", line 1
+    for book in [book1 book2 book3 book4]:
+                           ^
+SyntaxError: invalid syntax
+
+
+In [59]: for book in [book1,book2,book3,book4]: 
+    ...:     auth4.books.add(book) 
+    ...:                                                                                                                                                                                                    
+
+In [60]: auth4.books                                                                                                                                                                                        
+Out[60]: <django.db.models.fields.related_descriptors.create_forward_many_to_many_manager.<locals>.ManyRelatedManager at 0x7fda2d0d2510>
+
+In [61]: auth4.books.all()                                                                                                                                                                                  
+Out[61]: <QuerySet [<Book: Book object (1)>, <Book: Book object (2)>, <Book: Book object (3)>, <Book: Book object (4)>]>
+
+In [62]: book5=Book.objects.get(id=5)                                                                                                                                                                       
+
+In [63]: auth4.books.add(book5)                                                                                                                                                                             
+
+In [64]: auth4.save()                                                                                                                                                                                       
+
+In [65]: book3=Book.objects.get(id=3)                                                                                                                                                                       
+
+In [66]: book3.authors                                                                                                                                                                                      
+Out[66]: <django.db.models.fields.related_descriptors.create_forward_many_to_many_manager.<locals>.ManyRelatedManager at 0x7fda2d0df290>
+
+In [67]: book3.authors.all()                                                                                                                                                                                
+Out[67]: <QuerySet [<Author: Author object (2)>, <Author: Author object (3)>, <Author: Author object (4)>]>
+
+In [68]: book3.authors.get(id=1)                                                                                                                                                                            
+---------------------------------------------------------------------------
+DoesNotExist                              Traceback (most recent call last)
+<ipython-input-68-4d7b4d774fe8> in <module>
+----> 1 book3.authors.get(id=1)
+
+~/Library/Mobile Documents/com~apple~CloudDocs/Documents/codingdojo/python_stack/my_environments/djangoPy3Env/lib/python3.7/site-packages/django/db/models/manager.py in manager_method(self, *args, **kwargs)
+     80         def create_method(name, method):
+     81             def manager_method(self, *args, **kwargs):
+---> 82                 return getattr(self.get_queryset(), name)(*args, **kwargs)
+     83             manager_method.__name__ = method.__name__
+     84             manager_method.__doc__ = method.__doc__
+
+~/Library/Mobile Documents/com~apple~CloudDocs/Documents/codingdojo/python_stack/my_environments/djangoPy3Env/lib/python3.7/site-packages/django/db/models/query.py in get(self, *args, **kwargs)
+    406             raise self.model.DoesNotExist(
+    407                 "%s matching query does not exist." %
+--> 408                 self.model._meta.object_name
+    409             )
+    410         raise self.model.MultipleObjectsReturned(
+
+DoesNotExist: Author matching query does not exist.
+
+In [69]: book3.authors.remove(auth1)                                                                                                                                                                        
+
+In [70]: book3.authors.all()                                                                                                                                                                                
+Out[70]: <QuerySet [<Author: Author object (2)>, <Author: Author object (3)>, <Author: Author object (4)>]>
+
+In [71]: book2=Book.objects.get(ID=2)                                                                                                                                                                       
+---------------------------------------------------------------------------
+FieldError                                Traceback (most recent call last)
+<ipython-input-71-1bbf6970aa5f> in <module>
+----> 1 book2=Book.objects.get(ID=2)
+
+~/Library/Mobile Documents/com~apple~CloudDocs/Documents/codingdojo/python_stack/my_environments/djangoPy3Env/lib/python3.7/site-packages/django/db/models/manager.py in manager_method(self, *args, **kwargs)
+     80         def create_method(name, method):
+     81             def manager_method(self, *args, **kwargs):
+---> 82                 return getattr(self.get_queryset(), name)(*args, **kwargs)
+     83             manager_method.__name__ = method.__name__
+     84             manager_method.__doc__ = method.__doc__
+
+~/Library/Mobile Documents/com~apple~CloudDocs/Documents/codingdojo/python_stack/my_environments/djangoPy3Env/lib/python3.7/site-packages/django/db/models/query.py in get(self, *args, **kwargs)
+    397         keyword arguments.
+    398         """
+--> 399         clone = self.filter(*args, **kwargs)
+    400         if self.query.can_filter() and not self.query.distinct_fields:
+    401             clone = clone.order_by()
+
+~/Library/Mobile Documents/com~apple~CloudDocs/Documents/codingdojo/python_stack/my_environments/djangoPy3Env/lib/python3.7/site-packages/django/db/models/query.py in filter(self, *args, **kwargs)
+    890         set.
+    891         """
+--> 892         return self._filter_or_exclude(False, *args, **kwargs)
+    893 
+    894     def exclude(self, *args, **kwargs):
+
+~/Library/Mobile Documents/com~apple~CloudDocs/Documents/codingdojo/python_stack/my_environments/djangoPy3Env/lib/python3.7/site-packages/django/db/models/query.py in _filter_or_exclude(self, negate, *args, **kwargs)
+    908             clone.query.add_q(~Q(*args, **kwargs))
+    909         else:
+--> 910             clone.query.add_q(Q(*args, **kwargs))
+    911         return clone
+    912 
+
+~/Library/Mobile Documents/com~apple~CloudDocs/Documents/codingdojo/python_stack/my_environments/djangoPy3Env/lib/python3.7/site-packages/django/db/models/sql/query.py in add_q(self, q_object)
+   1288         # So, demotion is OK.
+   1289         existing_inner = {a for a in self.alias_map if self.alias_map[a].join_type == INNER}
+-> 1290         clause, _ = self._add_q(q_object, self.used_aliases)
+   1291         if clause:
+   1292             self.where.add(clause, AND)
+
+~/Library/Mobile Documents/com~apple~CloudDocs/Documents/codingdojo/python_stack/my_environments/djangoPy3Env/lib/python3.7/site-packages/django/db/models/sql/query.py in _add_q(self, q_object, used_aliases, branch_negated, current_negated, allow_joins, split_subq, simple_col)
+   1316                     child, can_reuse=used_aliases, branch_negated=branch_negated,
+   1317                     current_negated=current_negated, allow_joins=allow_joins,
+-> 1318                     split_subq=split_subq, simple_col=simple_col,
+   1319                 )
+   1320                 joinpromoter.add_votes(needed_inner)
+
+~/Library/Mobile Documents/com~apple~CloudDocs/Documents/codingdojo/python_stack/my_environments/djangoPy3Env/lib/python3.7/site-packages/django/db/models/sql/query.py in build_filter(self, filter_expr, branch_negated, current_negated, can_reuse, allow_joins, split_subq, reuse_with_filtered_relation, simple_col)
+   1188         if not arg:
+   1189             raise FieldError("Cannot parse keyword query %r" % arg)
+-> 1190         lookups, parts, reffed_expression = self.solve_lookup_type(arg)
+   1191 
+   1192         if not getattr(reffed_expression, 'filterable', True):
+
+~/Library/Mobile Documents/com~apple~CloudDocs/Documents/codingdojo/python_stack/my_environments/djangoPy3Env/lib/python3.7/site-packages/django/db/models/sql/query.py in solve_lookup_type(self, lookup)
+   1047             if expression:
+   1048                 return expression_lookups, (), expression
+-> 1049         _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+   1050         field_parts = lookup_splitted[0:len(lookup_splitted) - len(lookup_parts)]
+   1051         if len(lookup_parts) > 1 and not field_parts:
+
+~/Library/Mobile Documents/com~apple~CloudDocs/Documents/codingdojo/python_stack/my_environments/djangoPy3Env/lib/python3.7/site-packages/django/db/models/sql/query.py in names_to_path(self, names, opts, allow_many, fail_on_missing)
+   1418                     ])
+   1419                     raise FieldError("Cannot resolve keyword '%s' into field. "
+-> 1420                                      "Choices are: %s" % (name, ", ".join(available)))
+   1421                 break
+   1422             # Check if we need any joins for concrete inheritance cases (the
+
+FieldError: Cannot resolve keyword 'ID' into field. Choices are: authors, created_at, desc, id, title, updated_at
+
+In [72]: book2=Book.objects.get(id=2)                                                                                                                                                                       
+
+In [73]: book2                                                                                                                                                                                              
+Out[73]: <Book: Book object (2)>
+
+In [74]: auth5                                                                                                                                                                                              
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+<ipython-input-74-091ac200752f> in <module>
+----> 1 auth5
+
+NameError: name 'auth5' is not defined
+
+In [75]: auth5=Author.objects.get(id=5)                                                                                                                                                                     
+
+In [76]: book2.authors.add(auth5)                                                                                                                                                                           
+
+In [77]: book2.save()                                                                                                                                                                                       
+
+In [78]: auth3                                                                                                                                                                                              
+Out[78]: <Author: Author object (3)>
+
+In [79]: auth3=Author.objects.get(id=3)                                                                                                                                                                     
+
+In [80]: auth3.books.all()                                                                                                                                                                                  
+Out[80]: <QuerySet [<Book: Book object (1)>, <Book: Book object (2)>, <Book: Book object (3)>, <Book: Book object (4)>]>
+
+In [81]: book5                                                                                                                                                                                              
+Out[81]: <Book: Book object (5)>
+
+In [82]: book5=Book.objects.get(id=5)                                                                                                                                                                       
+
+In [83]: book5.authors.all()                                                                                                                                                                                
+Out[83]: <QuerySet [<Author: Author object (4)>]>

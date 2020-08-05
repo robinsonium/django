@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit show details</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <style>
+        label {
+            display: block;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="wrapper">
+        <h3 class="show_details">Edit details for show {{ show.id }}</h3>
+        {% if messages %}
+    <ul class="messages">    
+        {% for message in messages %}    
+            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+        {% endfor %}
+    </ul>
+    {% endif %}
+        <form action="/details/{{show.id}}/edit" method=POST style="margin: 10px;">
+            {% csrf_token %}
+            <label for="title">Title</label>
+            <input type="text" name="title" value="{{show.title}}" style="width: 400px">
+            <label for="network">Network</label>
+            <input type="text" name="network" value="{{show.network}}" style="width: 225px;">
+            <label for="release_date">Release Date</label>
+            <input type="text" name="release_date" value="{{ show.release_date  | date:"Y-m-d" }}" style="width: 225px">
+            <label for="description">Description</label>
+            <textarea rows=6 columns=150 name="description" value="{{show.description}}"
+                style="width: 450px; text-align: left;">{{show.description}}</textarea>
+            <button style="display: block; margin: 1px; border-radius: 5px">Update show</button>
+        </form>
+        <a class="show_details" href="/details/{{show.id}}">View this show's details</a>
+    </div>
+</body>
+
+</html>

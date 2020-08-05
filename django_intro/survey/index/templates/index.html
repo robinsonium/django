@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>index</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+    <div id="wrapper">
+        <form action="/result" method="post">
+            {% csrf_token %}
+            <p>Your name: <input name="name" type="text"></p>
+            <p>Dojo location:<input name="location" type="text"></p>
+            <p>Favorite Language: <select name="fave_language">
+                    <option value="javascript">Javascript</option>
+                    <option value="Python">Python</option>
+                    <option value="R">R</option>
+                    <option value="shell">Dont' bash the Bash</option>
+                </select></p>
+
+            <p>Select your gender:</p>
+            <label for="male">Male</label>
+            <input type="radio" name="gender" value="male">
+            <label for="female">Female</label>
+            <input type="radio" name="gender" value="female">
+            <label for="decline">None of your business</label>
+            <input type="radio" name="gender" value="decline">
+
+            <p>Why do you want to learn Python? Select as many as apply</p>
+            <input type="checkbox" name="salary">
+            <label for="salary">$$$</label>
+            <input type="checkbox" name="fame">
+            <label for="fame">Fame</label>
+            <input type="checkbox" name="career">
+            <label for="career">Career change</label>
+            <input type="checkbox" name="knowledge">
+            <label for="knowledge">General knowledge</label>
+           
+            <p>Comment (optional):<input name="comment" type="textarea"></p>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</body>
+
+</html>

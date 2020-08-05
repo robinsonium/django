@@ -1,0 +1,50 @@
+*{
+    font-family: sans-serif;
+    margin: 0px auto;
+}
+
+#wrapper{
+    width: 900px;
+    margin-bottom: 2px;
+    padding: 2px;
+}
+
+table,
+th,
+td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    width: 850px;
+    text-align: left;
+}
+
+td,td {
+    padding: 3px;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+table {
+    margin-left: 5px;
+    margin-bottom: 15px;
+}
+
+input, textarea {
+    margin: 5px 5px 10px 0px;
+    display: block;
+}
+
+input,label{
+    display: block;
+}
+
+.show_details{
+    margin: 10px;
+}
+
+.header-footer{
+    margin: 15px;
+    color: cornflowerblue;
+}

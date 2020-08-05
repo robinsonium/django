@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show details</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <div id="wrapper">
+    <a style="text-align: right; display: block;" href="{% url 'all_shows' %}">Go back</a>
+    <h2>TV Show {{show.id}}</h2>
+    <p>Title: {{show.title}}</p>
+    <p>Network: {{show.network}}</p>
+    <p>Release Date: {{show.release_date  | date:"Y-m-d" }}</p>
+    <p>Description: {{show.description}}</p>
+    <p>Last updated: {{show.updated_at}}</p>
+
+    <a href="/details/{{show.id}}/edit">Edit</a> | <a href="/shows/{{show.id}}/delete">Delete</a>
+</div>
+</body>
+</html>

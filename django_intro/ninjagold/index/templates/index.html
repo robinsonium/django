@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ninja Gold!</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+    <h2 id='count'>Your gold: {{request.session.gold}}</h2>
+
+    <div id="wrapper">
+
+        <div class="cell">
+            <h1>Farm</h1>
+            <p>(earns 10-20 golds)</p>
+            <form action="process_money" method=POST>
+                {% csrf_token %}
+                <input type="hidden" name="location" value="farm">
+                <button>Find Gold!</button>
+            </form>
+        </div>
+        <div class="cell">
+            <h1>Cave</h1>
+            <p>(earns 5-10 golds)</p>
+            <form action="process_money" method=POST>
+                {% csrf_token %}
+                <input type="hidden" name="location" value='cave'>
+                <button>Find Gold!</button>
+            </form>
+
+        </div>
+        <div class="cell">
+            <h1>House</h1>
+            <p>(earns 2-5 golds)</p>
+            <form action="process_money" method=POST>
+                {% csrf_token %}
+                <input type="hidden" name='location' value='house'>
+                <button>Find Gold!</button>
+            </form>
+        </div>
+        <div class="cell">
+            <h1>Casino</h1>
+            <p>(earns/takes 10-50 golds)</p>
+            <form action="process_money" method=POST>
+                {% csrf_token %}
+                <input type="hidden" name="location" value="casino">
+                <button>Find Gold!</button>
+            </form>
+        </div>
+
+        <p id="activities_header">Activities</p>
+        <div id="activities">
+            {% for activity in request.session.activities %}
+            <p>{{activity.earned}} gold earned at {{activity.time}}</p>
+            {% endfor %}
+        </div>        
+    </div>
+    <form action="reset" method=POST>
+        {% csrf_token %}
+        <button style="margin-top: 40px;">Reset game</button>
+    </form>
+</body>
+
+</html>

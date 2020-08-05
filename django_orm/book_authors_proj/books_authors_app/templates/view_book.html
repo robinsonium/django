@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Details</title>
+    <link rel="stylesheet" href="../static/bootstrap.css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body>
+    <h2>{{book.title}}</h2>
+    <h4>ID: {{book.id}}</h4>
+    <p>Description: {{book.desc}}</p>
+    <h4>Authors:</h4>
+    <ul>
+        {% for author in book.authors.all %}
+        <li>{{author.first_name}} {{author.last_name}}</li>
+        {% endfor %}
+    </ul>
+
+    <h4>Add author to this book</h4>
+    <form action="/add_author/{{book.id}}" method="post">
+        {% csrf_token %}
+        <select name="auth">
+            {% for author in authors %}
+            <option value={{author.id}} name="auth">{{author.first_name}} {{author.last_name}} ID#{{author.id}}</option>
+            {% endfor %}
+        </select>
+
+        <input type="submit">
+    </form>
+
+    <h4>Edit book description</h4>
+    <form action="/edit_book/{{book.id}}">
+        {% csrf_token %}
+        <label for="book_desc">Type a new description</label>
+        <input type="textarea" value="desciption">
+        <input type="submit">
+    </form>
+</body>
+
+</html>

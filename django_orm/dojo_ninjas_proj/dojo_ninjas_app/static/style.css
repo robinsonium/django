@@ -1,0 +1,35 @@
+*{
+    font-family: sans-serif;
+    margin: 2px;
+}
+
+#wrapper{
+    margin: 0px auto;
+    width: 1000px;
+}
+
+#dojos{
+    border: 1px dotted red;
+    padding: 5px;
+    display: inline-block;
+    width: 450px;
+    vertical-align: top;
+    margin: 10px;
+}
+
+#ninjas{
+    border: 1px dotted green;
+    padding: 5px;
+    width: 450px;
+    display: inline-block;
+    vertical-align: top;
+    margin: 10px;
+}
+
+#display{
+    border: 1px dotted purple;
+    padding: 5px;
+    width: 550px;
+    margin-left: 250px;
+}
+

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+    <H1>Submitted info:</H1>
+    <p>Name: {{request.session.name}}</p>
+    <p>Dojo Location: {{request.session.location}}</p>
+    <p>Favorite Language: {{request.session.fave_language}}</p>
+    <p>Gender: {{request.session.gender}}</p>
+    <p>Comment: {{request.session.comment}}</p>
+    <form action="/start_over">
+        <button name="start_over">Start over</button>
+    </form>
+</body>
+
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authors</title>
+    <link rel="stylesheet" href="../static/bootstrap.css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body>
+    <div id="wrapper">
+        <div class="box">
+            <h3>Add an author</h3>
+            <form action="create_author" method=POST>
+                {% csrf_token %}
+                <p>First name: <input type="text" name="first_name"></p>
+                <p>Last name: <input type="text" name="last_name"></p>
+                <p><input type="submit"></p>
+            </form>
+        </div>
+
+        <div class="box">
+            <h3>Delete an author</h3>
+            <form action="delete_author" method=POST>
+                {% csrf_token %}
+                <label for="auth_id">Enter author's ID #</label>
+                <input type="text" name="auth_id">
+                <p><input type="submit"></p>
+            </form>
+        </div>
+
+        <div class="box">
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Action</th>
+                </tr>
+                {% for author in authors %}
+                <tr>
+                    <td>{{author.id}}</td>
+                    <td>{{author.first_name}} {{author.last_name}}</td>
+                    <td><a href="author_details/{{author.id}}">View</a></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    <a style="width:500px; margin 0px auto;" href='/'>View list of books</a>
+</body>
+</html>

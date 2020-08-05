@@ -1,0 +1,34 @@
+*{
+    font-family: sans-serif;
+}
+
+#wrapper{
+    width: 1000px;
+    text-align: center;
+    padding: 5px;
+    margin: 0px auto;
+}
+
+table,th,td{
+    border: 1px solid black;
+    border-collapse: collapse;
+    width: 700px;
+    text-align: left;
+}
+
+td,td{
+    padding: 3px;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
+table{
+    margin-left: 100px;
+}
+
+input{
+    margin: 5px;
+}
+

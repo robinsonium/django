@@ -1,0 +1,179 @@
+/Users/brianrobinson/iCloud/com~apple~CloudDocs/Documents/codingdojo/python_stack/django/django_orm/dojo_ninjas_proj>python manage.py shell
+Python 3.7.8 (v3.7.8:4b47a5b6ba, Jun 27 2020, 04:47:50) 
+Type 'copyright', 'credits' or 'license' for more information
+IPython 7.16.1 -- An enhanced Interactive Python. Type '?' for help.
+
+In [1]: from dojo_ninjas_app.models import *                                                                                                                                                                
+
+In [2]: Dojo.objects.all()                                                                                                                                                                                  
+Out[2]: <QuerySet []>
+
+In [3]: Dojo.objects.create(name="Dojo1",city="Seattle",state="WA")                                                                                                                                         
+Out[3]: <Dojo: Dojo object (1)>
+
+In [4]: Dojo.objects.get(id=1).city                                                                                                                                                                         
+Out[4]: 'Seattle'
+
+In [5]: Dojo.objects.create(name="Dojo2",city="Las Angeles",state="CA")                                                                                                                                     
+Out[5]: <Dojo: Dojo object (2)>
+
+In [6]: Dojo.objects.create(name="Dojo3",city="Baltimore",state="MD")                                                                                                                                       
+Out[6]: <Dojo: Dojo object (3)>
+
+In [7]: d1=Dojo.objects.get(id=1)                                                                                                                                                                           
+
+In [8]: d1.delete()                                                                                                                                                                                         
+Out[8]: (1, {'dojo_ninjas_app.Ninja': 0, 'dojo_ninjas_app.Dojo': 1})
+
+In [9]: d2=Dojo.objects.get(id=2)                                                                                                                                                                           
+
+In [10]: d2.delete()                                                                                                                                                                                        
+Out[10]: (1, {'dojo_ninjas_app.Ninja': 0, 'dojo_ninjas_app.Dojo': 1})
+
+In [11]: d3=Dojo.objects.get(id=3)                                                                                                                                                                          
+
+In [12]: d3.delete()                                                                                                                                                                                        
+Out[12]: (1, {'dojo_ninjas_app.Ninja': 0, 'dojo_ninjas_app.Dojo': 1})
+
+In [13]: Dojo.objects.all()                                                                                                                                                                                 
+Out[13]: <QuerySet []>
+
+In [14]: Dojo.objects.create(name="dojo4",city="Las Vegas",state="NV")                                                                                                                                      
+Out[14]: <Dojo: Dojo object (4)>
+
+In [15]: Dojo.objects.create(name="dojo5",city="Mesa",state="AZ")                                                                                                                                           
+Out[15]: <Dojo: Dojo object (5)>
+
+In [16]: Dojo.objects.create(name="dojo6",city="Big Piney",state="WY")                                                                                                                                      
+Out[16]: <Dojo: Dojo object (6)>
+
+In [17]: Dojo.objects.all()                                                                                                                                                                                 
+Out[17]: <QuerySet [<Dojo: Dojo object (4)>, <Dojo: Dojo object (5)>, <Dojo: Dojo object (6)>]>
+
+In [18]: d4=Dojo.objects.get(id=4)                                                                                                                                                                          
+
+In [19]: Ninja.objects.create(first_name="brian",last_name="robinson",dojo=d4)                                                                                                                              
+Out[19]: <Ninja: Ninja object (1)>
+
+In [20]: Ninja.objects.get(id=1).__dict__                                                                                                                                                                   
+Out[20]: 
+{'_state': <django.db.models.base.ModelState at 0x7fd3497f8750>,
+ 'id': 1,
+ 'first_name': 'brian',
+ 'last_name': 'robinson',
+ 'dojo_id': 4,
+ 'created_at': datetime.datetime(2020, 7, 28, 23, 7, 39, 198458, tzinfo=<UTC>),
+ 'updated_at': datetime.datetime(2020, 7, 28, 23, 7, 39, 198496, tzinfo=<UTC>)}
+
+In [21]: Ninja.objects.get(id=1).dojo_id.city                                                                                                                                                               
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+<ipython-input-21-d7bed025f882> in <module>
+----> 1 Ninja.objects.get(id=1).dojo_id.city
+
+AttributeError: 'int' object has no attribute 'city'
+
+In [22]: d4.city                                                                                                                                                                                            
+Out[22]: 'Las Vegas'
+
+In [23]: some_ninja=Ninja.objects.get(id=1)                                                                                                                                                                 
+
+In [24]: some_ninja.dojo                                                                                                                                                                                    
+Out[24]: <Dojo: Dojo object (4)>
+
+In [25]: some_ninja.dojo.city                                                                                                                                                                               
+Out[25]: 'Las Vegas'
+
+In [26]: Ninja.objects.create(first_name="jessica",last_name="robinson",dojo=d4)                                                                                                                            
+Out[26]: <Ninja: Ninja object (2)>
+
+In [27]: Ninja.objects.create(first_name="derek",last_name="robinson",dojo=d4)                                                                                                                              
+Out[27]: <Ninja: Ninja object (3)>
+
+In [28]: d5=Dojo.objects.get(id=5)                                                                                                                                                                          
+
+In [29]: d6=Dojo.objects.get(id=6)                                                                                                                                                                          
+
+In [30]: Ninja.objects.create(first_name="Rae",last_name="short",dojo=d5)                                                                                                                                   
+Out[30]: <Ninja: Ninja object (4)>
+
+In [31]: Ninja.objects.create(first_name="Katie",last_name="rose",dojo=d5)                                                                                                                                  
+Out[31]: <Ninja: Ninja object (5)>
+
+In [32]: Ninja.objects.create(first_name="Dallas",last_name="charles",dojo=d5)                                                                                                                              
+Out[32]: <Ninja: Ninja object (6)>
+
+In [33]: Ninja.objects.create(first_name="chuck",last_name="meyer",dojo=d6)                                                                                                                                 
+Out[33]: <Ninja: Ninja object (7)>
+
+In [34]: Ninja.objects.create(first_name="preston",last_name="forrest",dojo=d6)                                                                                                                             
+Out[34]: <Ninja: Ninja object (8)>
+
+In [35]: Ninja.objects.create(first_name="tracy",last_name="preston",dojo=d6)                                                                                                                               
+Out[35]: <Ninja: Ninja object (9)>
+
+In [36]: Ninja.objects.filter(dojo=d6)                                                                                                                                                                      
+Out[36]: <QuerySet [<Ninja: Ninja object (7)>, <Ninja: Ninja object (8)>, <Ninja: Ninja object (9)>]>
+
+In [37]: Ninja.objects.filter(dojo=d6).first_name                                                                                                                                                           
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+<ipython-input-37-07affc52d64f> in <module>
+----> 1 Ninja.objects.filter(dojo=d6).first_name
+
+AttributeError: 'QuerySet' object has no attribute 'first_name'
+
+In [38]: d6_ninjas=Ninja.objects.filter(dojo=d6)                                                                                                                                                            
+
+In [39]: for i in d6_ninjas: 
+    ...:     print(i.first_name) 
+    ...:                                                                                                                                                                                                    
+chuck
+preston
+tracy
+
+In [40]: Ninja.objects.filter(dojo=d4)                                                                                                                                                                      
+Out[40]: <QuerySet [<Ninja: Ninja object (1)>, <Ninja: Ninja object (2)>, <Ninja: Ninja object (3)>]>
+
+In [41]: Ninja.objects.last().dojo                                                                                                                                                                          
+Out[41]: <Dojo: Dojo object (6)>
+
+In [42]: quit                                                                                                                                                                                               
+/Users/brianrobinson/iCloud/com~apple~CloudDocs/Documents/codingdojo/python_stack/django/django_orm/dojo_ninjas_proj>python manage.py makemigrations
+You are trying to add a non-nullable field 'desc' to dojo without a default; we can't do that (the database needs something to populate existing rows).
+Please select a fix:
+ 1) Provide a one-off default now (will be set on all existing rows with a null value for this column)
+ 2) Quit, and let me add a default in models.py
+Select an option: 1
+Please enter the default value now, as valid Python
+The datetime and django.utils.timezone modules are available, so you can do e.g. timezone.now
+Type 'exit' to exit this prompt
+>>> "old dojo"
+Migrations for 'dojo_ninjas_app':
+  dojo_ninjas_app/migrations/0002_dojo_desc.py
+    - Add field desc to dojo
+/Users/brianrobinson/iCloud/com~apple~CloudDocs/Documents/codingdojo/python_stack/django/django_orm/dojo_ninjas_proj>python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, contenttypes, dojo_ninjas_app, sessions
+Running migrations:
+  Applying dojo_ninjas_app.0002_dojo_desc... OK
+/Users/brianrobinson/iCloud/com~apple~CloudDocs/Documents/codingdojo/python_stack/django/django_orm/dojo_ninjas_proj>python manage.py shell
+Python 3.7.8 (v3.7.8:4b47a5b6ba, Jun 27 2020, 04:47:50) 
+Type 'copyright', 'credits' or 'license' for more information
+IPython 7.16.1 -- An enhanced Interactive Python. Type '?' for help.
+
+In [1]: from dojo_ninjas_app.models import *                                                                                                                                                                
+
+In [2]: Dojo.objects.all()                                                                                                                                                                                  
+Out[2]: <QuerySet [<Dojo: Dojo object (4)>, <Dojo: Dojo object (5)>, <Dojo: Dojo object (6)>]>
+
+In [3]: Dojo.objects.create(name="dojo7",city="portlandia",state="OR",desc="A wonderful learning environment for new and old, filled with delights and wonderment! Mostly wonderment!")                     
+Out[3]: <Dojo: Dojo object (7)>
+
+In [4]: Dojo.objects.get(id=7).name                                                                                                                                                                         
+Out[4]: 'dojo7'
+
+In [5]: Dojo.objects.get(id=7).desc                                                                                                                                                                         
+Out[5]: 'A wonderful learning environment for new and old, filled with delights and wonderment! Mostly wonderment!'
+
+In [6]: exit        

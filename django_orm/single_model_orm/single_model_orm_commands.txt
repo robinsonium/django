@@ -1,0 +1,103 @@
+/Users/brianrobinson/iCloud/com~apple~CloudDocs/Documents/codingdojo/python_stack/django/django_orm/single_model_orm>python manage.py shell
+Python 3.7.8 (v3.7.8:4b47a5b6ba, Jun 27 2020, 04:47:50) 
+Type 'copyright', 'credits' or 'license' for more information
+IPython 7.16.1 -- An enhanced Interactive Python. Type '?' for help.
+
+In [1]: from users_app import *                                                                                                                                                                             
+
+In [2]: User.objects.all()                                                                                                                                                                                  
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+<ipython-input-2-84a4882c08e9> in <module>
+----> 1 User.objects.all()
+
+NameError: name 'User' is not defined
+
+In [3]: from users_app.models import *                                                                                                                                                                      
+
+In [4]: User.objects.all()                                                                                                                                                                                  
+Out[4]: <QuerySet []>
+
+In [5]: User.objects.create(first_name="brian",last_name= 
+   ...: "robinson",email_address="brian@awesome.com",age=47)                                                                                                                                                
+Out[5]: <User: User object (1)>
+
+In [6]: User.objects.get(id=1)                                                                                                                                                                              
+Out[6]: <User: User object (1)>
+
+In [7]: User.objects.get(id=1).__dict__                                                                                                                                                                     
+Out[7]: 
+{'_state': <django.db.models.base.ModelState at 0x7f8d5f8347d0>,
+ 'id': 1,
+ 'first_name': 'brian',
+ 'last_name': 'robinson',
+ 'email_address': 'brian@awesome.com',
+ 'age': 47,
+ 'created_at': datetime.datetime(2020, 7, 28, 1, 46, 24, 700044, tzinfo=<UTC>),
+ 'updated_at': datetime.datetime(2020, 7, 28, 1, 46, 24, 700103, tzinfo=<UTC>)}
+
+In [8]: User.objects.create(first_name="jessica",last_name="robinson",email_address="Jess@awesome.com",age=40)                                                                                              
+Out[8]: <User: User object (2)>
+
+In [9]: User.objects.create(first_name="raelynn",last_name="short",email_address="raerae@awesome.com",age=1)                                                                                                
+Out[9]: <User: User object (3)>
+
+In [10]: User.objects.all()                                                                                                                                                                                 
+Out[10]: <QuerySet [<User: User object (1)>, <User: User object (2)>, <User: User object (3)>]>
+
+In [11]: rae=User.objects.get(id=3)                                                                                                                                                                         
+
+In [12]: rae.last_name="pancakes"                                                                                                                                                                           
+
+In [13]: rae.save()                                                                                                                                                                                         
+
+In [14]: jess=User.objects.get(id=2)                                                                                                                                                                        
+
+In [15]: jess.delete()                                                                                                                                                                                      
+Out[15]: (1, {'users_app.User': 1})
+
+In [16]: User.objects.all()                                                                                                                                                                                 
+Out[16]: <QuerySet [<User: User object (1)>, <User: User object (3)>]>
+
+In [17]: User.objects.all().order_by(first_name)                                                                                                                                                            
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+<ipython-input-17-2773c2c3d8d2> in <module>
+----> 1 User.objects.all().order_by(first_name)
+
+NameError: name 'first_name' is not defined
+
+In [18]: User.objects.all().order_by("first_name")                                                                                                                                                          
+Out[18]: <QuerySet [<User: User object (1)>, <User: User object (3)>]>
+
+In [19]: User.objects.all().order_by("-first_name")                                                                                                                                                         
+Out[19]: <QuerySet [<User: User object (3)>, <User: User object (1)>]>
+
+In [20]: User.objects.all().order_by("-first_name").first_name                                                                                                                                              
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+<ipython-input-20-49cc0a08b535> in <module>
+----> 1 User.objects.all().order_by("-first_name").first_name
+
+AttributeError: 'QuerySet' object has no attribute 'first_name'
+
+In [21]: users=User.objects.all().order_by("-first_name")                                                                                                                                                   
+
+In [22]: type(users)                                                                                                                                                                                        
+Out[22]: django.db.models.query.QuerySet
+
+In [23]: for user in users: 
+    ...:     print user.first_name                                                                                                                                                                          
+  File "<ipython-input-23-7d4f27e94091>", line 2
+    print user.first_name
+             ^
+SyntaxError: Missing parentheses in call to 'print'. Did you mean print(user.first_name)?
+
+
+In [24]: for user in users: 
+    ...:     print(user.first_name) 
+    ...:                                                                                                                                                                                                    
+raelynn
+brian
+
+In [25]:     
