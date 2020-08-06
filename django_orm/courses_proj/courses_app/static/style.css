@@ -1,0 +1,44 @@
+*{
+    font-family: sans-serif;
+}
+
+#wrapper{
+    width: 900px;
+    margin: 0px auto;
+}
+
+table,
+th,
+td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    width: 850px;
+    text-align: left;
+}
+
+td,td {
+    padding: 3px;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+table {
+    margin-left: 5px;
+}
+
+
+.show_details{
+    margin: 10px;
+}
+
+.header-footer{
+    margin: 15px;
+    color: cornflowerblue;
+}
+
+.add{
+    width: 400px;
+    border: 1px dotted red;
+}
