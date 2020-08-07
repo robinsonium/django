@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comments</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body>
+    <div id="wrapper">
+    <h3 class="center_title header-footer">Comments</h3>
+    <a class="header-footer" href="/">Back to main</a>
+    <form action="/{{course.id}}/add_comment" method=POST>
+        {% csrf_token %}
+        <label for="comment" class="block">Add a comment about this course</label>
+        <textarea name="comment" cols="80" rows="10" class="block"></textarea>
+        <input type="submit" value="Submit" class="button">
+    </form>
+    <ul>
+        {% for comment in course.comment.all %}
+        <li><span class="bold">{{comment.content}} </span>(posted {{comment.created_at}}) </li>
+        {% endfor %}
+    </ul>
+</div>
+</body>
+
+</html>

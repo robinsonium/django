@@ -9,7 +9,17 @@
 </head>
 <body>
     <div id="wrapper">
-        <h3>Placeholder for delete.html</h3>
+        <h3>Are you sure you want to delete the following course?</h3>
+        <p>Name: {{ course.name }}</p>
+        <p>Description: {{ course.description.content }}</p>
+        <form action="/destroy/{{course.id}}">
+            {% csrf_token %}
+            <input class="warning button" type="submit" value="yes, I really want to do this!">
+        </form>
+        <form action="/courses">
+            {% csrf_token %}
+            <input class="button" type="submit" value="No" style="background-color: limegreen;">
+        </form>
     </div>
 </body>
 </html>
