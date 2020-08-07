@@ -7,7 +7,7 @@ def index(request):
     context={
         "courses":Course.objects.all(),
     }
-    print("context:",context)
+    # print("context:",context)
     return render(request,"index.html",context)
 
 def new(request):
@@ -16,7 +16,7 @@ def new(request):
         if len(errors) > 0:
             for value in errors.values():
                 messages.error(request, value)
-        return redirect('/')
+            return redirect('/')
     this_description=Description.objects.create(content=request.POST['course_description'])
     Course.objects.create(name=request.POST['course_name'],description=this_description)
     print("added course!")
@@ -32,7 +32,7 @@ def prompt(request,id):
 def destroy(request,id):
     this_course=Course.objects.get(id=id)
     this_course.delete()
-    return redirect('/courses')
+    return redirect('/')
 
 def comment(request,id):
     context={
