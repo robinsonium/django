@@ -9,7 +9,6 @@
 }
 
 
-
 .header-footer{
     margin: 15px;
     color: cornflowerblue;
@@ -33,10 +32,10 @@
     font-weight: bold;
 }
 
-label,input {
+input {
     display: block;
     padding: 2px;
-    margin-bottom: 3px;
+    margin-bottom: 5px;
 }
 
 #login, #registration {
@@ -45,3 +44,41 @@ label,input {
     vertical-align: top;
 }
 
+.success{
+    color:limegreen;
+}
+
+.right{
+    text-align: right;
+    display: block;
+    margin-right: 10px;
+}
+
+input:invalid{
+    border-color: #900;
+    background-color: #FDD;
+  }
+
+  input:focus:invalid {
+    outline: none;
+  }
+  
+/* input:invalid:required {
+background-image: linear-gradient(to right, grey, rgb(178, 238, 178));
+    } */
+
+.error {
+    width  : 100%;
+    padding: 0;
+    
+    font-size: 80%;
+    color: white;
+    background-color: #900;
+    border-radius: 0 0 5px 5px;
+    
+    box-sizing: border-box;
+    }
+
+input:valid {
+border: 2px solid black;
+    }
