@@ -4,26 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coding Dojo Wall</title>
     {% load static %}
+    <link rel="stylesheet" href="{% static 'messages/style.css' %}">
+    <title>Coding Dojo Wall</title>
     <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
         integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
         crossorigin="anonymous"></script> -->
-        <link rel="stylesheet" href="{% static 'style.css' %}">
+
 </head>
 
 <body>
-    <div id="header" style="border: 2px solid black; 
-    display: flex; 
-    justify-content: space-between; 
-    margin: 5px; 
-    vertical-align: top; 
-    padding: 5px;">
+    <div id="header">
         
         <h2 class="header-footer">Coding Dojo Wall</h2>
-        <h3>Welcome, {{request.session.first_name}}</h3>
+        <h3 id="welcome">Welcome, {{request.session.first_name}}</h3>
         <a class="right" href="logout">Log off</a>
     </div>
     <div id="wrapper">
@@ -36,18 +32,24 @@
         </form>
 
         {% for message in messages reversed %}
-        <h5>{{message.poster.first_name}} {{message.poster.last_name}} {{message.created_at}}</h5>
+        <h5>{{message.poster.first_name}} {{message.poster.last_name}} at
+            {{message.created_at|date:"d M Y"}} 
+            {{message.created_at|time:"H:i"}}</h5>
         <p class="message">{{message.content}}</p>
-        <form action="add_comment" method="POST">
-        {% csrf_token %}
-        <h4>Post a comment</h4>
-        <textarea name="comment" id="comment" cols="75" rows="3"></textarea>
-        <input id="post_comment" type="submit" value="Post a comment">
-        </form>
-        {% for comment in message.comments %}
-            <h5>{{comment.poster}} {{comment.created_at}}</h5>
-            <p class="comment">{{comment.content}}</p>
+
+        {% for comment in message.comment.all %}
+            <h5 class="comment">{{comment.poster.first_name}} {{comment.poster.last_name}} commented at 
+                {{comment.created_at|date:"d M Y"}}
+                {{comment.created_at|time:"H:i"}}</h5>
+            <p class="comment">{{comment.content}} <a href="{{comment.id}}/delete_comment" class="delete_comment">Delete</a></p>
             {% endfor %}
+            <form action="add_comment" method="POST" style="margin-top: 15px;">
+                {% csrf_token %}
+                <h4>Post a comment</h4>
+                <textarea name="comment" id="comment" cols="75" rows="3"></textarea>
+                <input id="post_comment" type="submit" value="Post a comment">
+                <input type="hidden" name="messageid" value={{message.id}}>
+                </form>
         {% endfor %}
     </div>
 </body>

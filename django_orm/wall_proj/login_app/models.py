@@ -42,6 +42,20 @@ class UserManager(models.Manager):
         # if you add 13 years to the birthday and that ends up being a future date,
         if birthday_obj + relativedelta(years=13) > datetime.now():
             errors['min_age']="User must be at least 13 years old"
+
+        passwd=postdata['password']
+        passwd_conf=postdata['confirm']
+        # PASSWORD MUST MATCH CONFIRMATION
+        if passwd != passwd_conf:
+            errors['confirmation']="Password did not match confirmation"
+        # PASSWORD MUST BE AT LEAST 8 CHARACTERS
+        if len(passwd) < 8:
+            errors['pwlength']="Password must be at least 8 characters"
+
+        # PASSWORD NEEDS AT LEAST 1 UPPERCASE CHARACTER
+        if not any(n.isupper() for  n in passwd): 
+            errors['uppercase']="Password must have at least one upper case character"
+        
         return errors
 
 # Create your models here.

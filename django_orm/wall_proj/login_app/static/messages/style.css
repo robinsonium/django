@@ -1,0 +1,105 @@
+*{
+    font-family: sans-serif;
+    margin: 0px auto;
+}
+
+#wrapper{
+    padding: 10px;
+    width: 900px;
+    margin: 0px auto
+}
+
+#header{
+    
+    width: 900px;
+    margin: 0px auto;
+    padding: 10px;
+    vertical-align: bottom;
+    border: 2px solid black; 
+    border-radius: 5px;
+    /* display: flex; 
+    justify-content: space-between;  */
+    vertical-align: bottom; 
+}
+
+
+.header-footer{
+    margin: 15px;
+    color: cornflowerblue;
+    display: inline-block;
+}
+
+.button{
+    border-radius: 5px;
+    margin: 6px;
+}
+
+.block {
+    display: block;
+    margin: 2px;
+}
+
+.center_title{
+    text-align: center;
+}
+
+.bold{
+    font-weight: bold;
+}
+
+#welcome{
+    margin-left: 20em;
+    display: inline-block;
+    margin-right: 30px;
+}
+
+.right{
+    text-align: right;
+    display: inline-block;
+    margin-right: 10px;
+    text-decoration: none;
+}
+
+.message {
+    padding: 5px 5px 20px 5px;
+}
+
+.comment{
+    padding: 3px;
+    margin-left: 25px;
+    color: rgb(14, 160, 14);
+}
+
+#post_message {
+    margin-top: 5px; 
+    display: block; 
+    margin-left: 32em;
+    background-color: blue;
+    box-shadow: black;
+    color: white;
+    border-radius: 5px;
+}
+
+#post_comment {
+    margin-top: 5px; 
+    display: block; 
+    margin-left: 32em;
+    background-color: rgb(14, 160, 14);
+    box-shadow: black;
+    color: white;
+    border-radius: 5px;
+}
+
+.delete_comment {
+    margin: 5px 0px 0px 5px; 
+    display: inline-block; 
+    background-color: rgb(154, 93, 214);
+    box-shadow: black;
+    color: white;
+    border-radius: 5px;
+    text-align: left;
+    font-size: .8em;
+    text-decoration: none;
+    padding: 2px
+}
+
