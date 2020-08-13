@@ -1,0 +1,111 @@
+*{
+    font-family: sans-serif;
+    margin: 0px auto;
+    border: 1px dotted red;
+}
+
+#wrapper{
+    margin: 40px;
+    padding: 10px;
+    width: 900px;
+}
+
+#header{
+    width: 400px;
+    padding: 15px;
+    vertical-align: center;
+}
+
+
+.header-footer{
+    margin: 15px;
+    color: cornflowerblue;
+}
+
+.button{
+    border-radius: 5px;
+    margin: 6px;
+}
+
+.block {
+    display: block;
+    margin: 2px;
+}
+
+.center_title{
+    text-align: center;
+}
+
+.bold{
+    font-weight: bold;
+}
+
+/* input {
+    display: block;
+    padding: 2px;
+    margin-bottom: 5px;
+}
+
+#login, #registration {
+    display: inline-block;
+    width: 450px;
+    vertical-align: top;
+}
+
+.success{
+    color:limegreen;
+} */
+
+.right{
+    text-align: right;
+    display: block;
+    margin-right: 10px;
+}
+
+/* input:invalid{
+    border-color: #900;
+    background-color: #FDD;
+  }
+
+input:focus:invalid {
+    outline: none;
+  }
+
+.error {
+    width  : 100%;
+    padding: 0;
+    
+    font-size: 80%;
+    color: white;
+    background-color: #900;
+    border-radius: 0 0 5px 5px;
+    
+    box-sizing: border-box;
+    }
+
+input:valid {
+border: 2px solid black;
+    } */
+
+.message{
+    padding: 20px;
+    outline: dotted red;
+}
+
+#post_message {
+    margin-top: 20px; 
+    display: block; 
+    margin-left: 23em;
+    background-color: blue;
+    box-shadow: black;
+    color: white;
+}
+
+#post_comment {
+    margin-top: 20px; 
+    display: block; 
+    margin-left: 23em;
+    background-color: rgb(14, 160, 14);
+    box-shadow: black;
+    color: white;
+}
