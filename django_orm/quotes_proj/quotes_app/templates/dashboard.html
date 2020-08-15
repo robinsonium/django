@@ -12,8 +12,8 @@
 <body>
     <div id="wrapper">
         <a href="edit/{{user.id}}" class="right">Edit my account</a>
-        <a class="right" href="/logout">Logout</a>
-        <h4>Welcome {{user.first_name}}  {{user.last_name}}!</h4>
+        <a class="logout" href="/logout">Logout</a>
+        <h3>Welcome {{user.first_name}}!</h3>
         <div id="quotes">
             <h3 class="title">Quotes</h3>
             {% for quote in quotes %}
@@ -21,7 +21,8 @@
                 <p><span class="author">{{quote.author}}:</span> {{quote.content}}</p>
                 <p>Posted by <a href="/view_profile/{{quote.posted_by.id}}">{{quote.posted_by.first_name}}
                         {{quote.posted_by.last_name}}</a>
-
+                        <p class="likes">{{quote.likes.count}} people liked this</p>
+                        <a class="likes" href="like/{{quote.id}}">Like!</a>
                     {% if request.session.userid == quote.posted_by.id %}
                     <a style="display: block" href="/delete/{{quote.id}}">Delete</a>
                     {% endif %}
@@ -32,7 +33,7 @@
             <h3 class="title">Add a Quote!</h3>
             <form action="/add_quote" method="POST">
                 {% csrf_token %}
-                <p>Author:</p>
+                <p>Author</p>
                 <input type="text" name="author" size="50">
                 <p>Quote</p>
                 <textarea name="content" cols="50" rows="7"></textarea>

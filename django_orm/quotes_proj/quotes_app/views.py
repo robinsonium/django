@@ -5,15 +5,18 @@ from quotes_app.models import *
 
 # Create your views here.
 def index(request):
+    print("reached index.html")
     return render(request,"index.html")
 
 def register(request):
     if request.method=="POST":
+        print("reached views.register, attempting to validate")
         errors = User.objects.validate_reg(request.POST)
         if errors:
             for value in errors.values():
                 messages.error(request, value)
             return redirect('/')
+        print("reached validation")
         f_name=request.POST['first_name']
         l_name=request.POST['last_name']
         email=request.POST['email']
@@ -52,6 +55,7 @@ def login(request):
             for value in errors.values():
                 messages.error(request, value)
             return redirect('/')
+    return(redirect('/'))
 
 
 def success(request):
@@ -105,8 +109,13 @@ def delete(request,id):
     this_quote.delete()
     return redirect('/quotes')
 
-def like(request):
-    return HttpResponse("placeholder for views.like")
+def like(request,id):
+    this_quote=Quote.objects.get(id=id)
+    logged_user=User.objects.get(id=request.session['userid'])
+    this_quote.likes.add(logged_user)
+    this_quote.save()
+    return redirect('/quotes')
+
 
 def edit(request,id):
     this_user=User.objects.get(id=id)

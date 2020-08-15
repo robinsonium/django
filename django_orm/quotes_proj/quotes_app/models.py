@@ -56,8 +56,8 @@ class UserManager(models.Manager):
             errors['first_name_length'] = "First name must be at least 2 characters"
         if len(postdata['last_name']) < 2:
             errors['last_name_length'] = "Last name must be at least 2 characters"
-        
         # EMAIL IS A VALID REGEX
+
         email_pattern = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
         if not email_pattern.match(postdata['email']):
             errors['email_pattern'] = "Invalid email address"
@@ -89,4 +89,5 @@ class Quote(models.Model):
     posted_by = models.ForeignKey(User, related_name="quotes", on_delete=models.CASCADE, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    likes=models.ManyToManyField(User,related_name="likes",)
     objects = QuoteManager()

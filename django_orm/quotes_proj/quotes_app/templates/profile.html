@@ -10,7 +10,7 @@
 <body>
     <div id="wrapper">
         <a href="/quotes" class="right">Back</a>
-        <a class="right" href="/logout">Logout</a>
+        <a class="logout" href="/logout">Logout</a>
         <h3>{{user.first_name}} {{user.last_name}}'s favorite quotes</h3>
         {% for quote in user.quotes.all %}
         <div class="quote">

@@ -12,4 +12,5 @@ urlpatterns = [
     path('add_quote',views.add_quote),
     path('delete/<int:id>',views.delete),
     path('edit/<int:id>',views.edit),
+    path('like/<int:id>',views.like),
 ]
