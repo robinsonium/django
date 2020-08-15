@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit profile</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <div id="wrapper">
+        <a href="/quotes" class="right">Back</a>
+        <a class="right" href="/logout">Logout</a>
+        <h3>Edit my account</h3>
+        {% if messages %}
+        <ul class="messages">
+                {% for message in messages %}
+                    <li>{{message}}</li>
+                {% endfor %}
+        </ul>
+        {% endif %}      
+        <form action="/edit/{{user.id}}" method="POST">
+            {% csrf_token %}
+            <p>First name:</p>
+            <input type="text" name="first_name" placeholder="{{user.first_name}}">
+            <p>Last name:</p>
+            <input type="text" name="last_name" placeholder="{{user.last_name}}">
+            <p>Email</p>
+            <input type="text" name="email" placeholder="{{user.email}}">
+            <input type="submit" value="Update">
+        </form>
+    </div>
+    
+</body>
+</html>

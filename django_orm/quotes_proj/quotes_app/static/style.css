@@ -1,0 +1,70 @@
+*{
+    font-family: sans-serif;
+}
+
+#wrapper {
+    width: 1000px;
+    margin: 0px auto;
+}
+
+#register, #login {
+    width: 450px;
+    display: inline-block;
+    vertical-align: top;
+    text-align: center;
+}
+
+#register p, #login p{
+    margin: 10px 3px 3px 3px;
+}
+
+#quotes, #add_quote {
+    width: 450px;
+    display: inline-block;
+    vertical-align: top;
+    text-align: center;
+    margin: 20px;
+}
+
+.title{
+    text-align: center;
+    color: cornflowerblue;
+}
+
+.send{
+    background-color: blue;
+    color: white;
+    border-radius: 5px;
+    box-shadow: black;
+    display: block;
+    margin: 15px;
+}
+
+.quote{
+    outline: 1px solid black;
+    padding: 5px;
+    margin: 5px;
+    text-align: left;
+}
+
+.quote :first-child{
+    font-style: italic;
+}
+
+.author{
+    font-style: bold;
+    color: firebrick;
+}
+
+.right{
+    text-align: right;
+    display: inline-block;
+    margin-right: 10px;
+    text-decoration: none;
+}
+
+.messages{
+    font-size: .8em;
+    list-style-type: none;
+    color: firebrick;
+}

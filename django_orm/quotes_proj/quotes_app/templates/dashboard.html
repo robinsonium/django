@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quotable Quotes</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body>
+    <div id="wrapper">
+        <a href="edit/{{user.id}}" class="right">Edit my account</a>
+        <a class="right" href="/logout">Logout</a>
+        <h4>Welcome {{user.first_name}}  {{user.last_name}}!</h4>
+        <div id="quotes">
+            <h3 class="title">Quotes</h3>
+            {% for quote in quotes %}
+            <div class="quote">
+                <p><span class="author">{{quote.author}}:</span> {{quote.content}}</p>
+                <p>Posted by <a href="/view_profile/{{quote.posted_by.id}}">{{quote.posted_by.first_name}}
+                        {{quote.posted_by.last_name}}</a>
+
+                    {% if request.session.userid == quote.posted_by.id %}
+                    <a style="display: block" href="/delete/{{quote.id}}">Delete</a>
+                    {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+        <div id="add_quote">
+            <h3 class="title">Add a Quote!</h3>
+            <form action="/add_quote" method="POST">
+                {% csrf_token %}
+                <p>Author:</p>
+                <input type="text" name="author" size="50">
+                <p>Quote</p>
+                <textarea name="content" cols="50" rows="7"></textarea>
+                <input type="submit" value="Submit" class="send">
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
