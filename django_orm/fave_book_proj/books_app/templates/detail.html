@@ -17,7 +17,8 @@
             <a class="right" href="../logout">Log off</a>
         </div>
         <div id="book_details">
-            <form action="{{book.id}}/edit">
+            <form action="../{{book.id}}/edit" method="POST">
+                {% csrf_token %}
                 <textarea name="title" cols="50" rows="1">{{book.title}}</textarea>
                 <p>Added by {{book.uploaded_by.first_name}} {{book.uploaded_by.last_name}}</p>
                 <p>Added on {{book.created_at|date:"d M Y"}} @ {{book.created_at|time:"h:i"}}</p>
@@ -38,6 +39,7 @@
                 <li>{{user.first_name}} {{user.last_name}}</li>
                 {% endfor %}
             </ul>
+            <a href="../{{book.id}}/like">Like this book</a>
         </div>
     </div>
 </body>

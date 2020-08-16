@@ -31,14 +31,25 @@ def like(request,id):
     this_book=Book.objects.get(id=id)
     this_user=request.session['userid']
     this_book.users_who_like.add(this_user)
-    
+    this_book.save()
+    return redirect('/books')
+
 # edit a book, if logged in user uploaded it
-def edit(request):
-    return HttpResponse("Placeholder for views.edit")
+def edit(request,id):
+    title=request.POST['title']
+    description=request.POST['description']
+    this_book=Book.objects.get(id=id)
+    this_book.title=title
+    this_book.description=description
+    this_book.save()
+    return redirect('/books')
 
 # delete a book, if logged in user deleted it
-def delete(request):
-    return HttpResponse("Placeholder for views.delete")
+def delete(request,id):
+    this_book=Book.objects.get(id=id)
+    this_book.delete()
+    return redirect('/books')
 
 def logout(request):
-    return HttpResponse("Placeholder for views.logout")
+    request.session.flush()
+    return redirect('/')
