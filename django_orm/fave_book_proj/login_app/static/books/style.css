@@ -1,0 +1,150 @@
+*{
+    font-family: sans-serif;
+    margin: 0px auto;
+}
+
+#wrapper{
+    padding: 10px;
+    width: 1000px;
+    margin: 10px;
+}
+
+#header{
+    width: 900px;
+    margin: 10px;
+    padding: 10px;
+    vertical-align: bottom;
+    border: 2px solid black; 
+    border-radius: 5px;
+    vertical-align: bottom; 
+}
+
+    #header h3{
+        color: cornflowerblue;
+
+    }
+
+#welcome{
+    margin-left: 20em;
+    display: inline-block;
+    margin-right: 30px;
+}
+    
+#add_book{
+    display: inline-block;
+    width: 425px;
+    margin: 10px;
+}
+
+    #add_book input{
+    width: 400px;
+    padding: 3px;
+    margin: 3px 0px;
+    }
+        
+    #add_book h4{
+        text-align: center;
+    }
+        
+    #add_book button{
+        background-color: blue;
+        color: white;
+        text-align: center;
+        border-radius: 5px;
+        width: 75px;
+    }   
+    
+#all_books, #book_details{
+    display: inline-block;
+    width: 425px;
+    vertical-align: top;
+    text-align: center;
+    margin: 10px;
+}
+
+#users{
+    display: inline-block;
+    width: 425px;
+    vertical-align: top;
+    text-align: center;
+    margin: 10px;
+}
+
+.header-footer{
+    margin: 15px;
+    color: cornflowerblue;
+    display: inline-block;
+}
+
+.button{
+    border-radius: 5px;
+    margin: 6px;
+}
+
+.block {
+    display: block;
+    margin: 2px;
+}
+
+.center_title{
+    text-align: center;
+}
+
+.bold{
+    font-weight: bold;
+}
+
+
+
+.booklist{
+    padding: 3px;
+    margin: 5px 0px;
+}
+.right{
+    margin-left: 675px;
+    text-decoration: none;
+}
+
+.message {
+    padding: 5px 5px 20px 5px;
+}
+
+.comment{
+    padding: 3px;
+    margin-left: 25px;
+    color: rgb(14, 160, 14);
+}
+
+/* #post_message {
+    margin-top: 5px; 
+    display: inline-block; 
+    /* margin-left: 20em; */
+    background-color: blue;
+    box-shadow: black;
+    color: white;
+    border-radius: 5px;
+} */
+
+/* #post_comment {
+    margin-top: 5px; 
+    display: block; 
+    margin-left: 32em;
+    background-color: rgb(14, 160, 14);
+    box-shadow: black;
+    color: white;
+    border-radius: 5px;
+} */
+
+/* .delete_comment {
+    margin: 5px 0px 0px 5px; 
+    display: inline-block; 
+    background-color: rgb(154, 93, 214);
+    box-shadow: black;
+    color: white;
+    border-radius: 5px;
+    text-align: left;
+    font-size: .8em;
+    text-decoration: none;
+    padding: 2px
+} */
+
